@@ -1,9 +1,9 @@
 var http = require('http'),
     crypto = require('crypto'),
     fs = require('fs'),
-    sys = require('sys'),
+    sys = require('util'),
     qs = require('querystring')
-    
+
 var transaction = {user:'cert_1279865159_biz_api1.gmail.com'
   ,pwd:'LXLDUTRFGA39YR25'
   ,amt:'99.06'
@@ -22,9 +22,9 @@ var transaction = {user:'cert_1279865159_biz_api1.gmail.com'
   ,countrycode:'US'
   ,zip:'68102'
   ,method:'doDirectPayment'
-}    
+}
 var host = 'api.sandbox.paypal.com'
-    
+
 function start(key, cert){
   var requestString = qs.stringify(transaction)
   var streetCred = crypto.createCredentials({key:key, cert:cert})
@@ -35,7 +35,7 @@ function start(key, cert){
               ,'Content-Type':'text/namevalue'})
 
   req.end(requestString)
-  
+
   req.on('response', function(res){
     res.on('data', function(data){
       sys.puts(sys.inspect(qs.parse(data)))
@@ -49,7 +49,7 @@ fs.readFile(__dirname+'/spec/certs/public-key.pem', 'ascii', function(err, pub){
   })
 })
   /*
-  
+
   function PaypalNetworkClient(host){
   this.request = function(request, callback){
     var requestString = qs.stringify(request)
@@ -66,4 +66,3 @@ fs.readFile(__dirname+'/spec/certs/public-key.pem', 'ascii', function(err, pub){
   }
 }
 */
-

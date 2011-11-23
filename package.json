@@ -12,9 +12,9 @@
     "node": ">=0.4.7"
   },
   "dependencies": {
-    "braintree":"*"
+
   },
   "devDependencies": {
-    "vows":"*"	
+    "vows":"*"
   }
 }
